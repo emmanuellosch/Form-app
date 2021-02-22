@@ -3,22 +3,19 @@ import { useState } from "react";
 
 function App() {
   const [product, setProduct] = useState({
-    product_name: "",
+    name: "",
     price: "",
     currency: "",
     category: "Green",
-    package_size: "",
-    support_contact: "",
-    product_tags: "",
-    on_sale: false,
+    product_packageSize: "",
+    product_supportContact: "",
+    product_productTags: [],
+    onSale: false,
   });
 
   const handleChange = (event) => {
     const field = event.target;
-    const value =
-      event.target.name === "on_sale"
-        ? event.target.checked
-        : event.target.value;
+    const value = field.type === "checkbox" ? field.checked : field.value;
 
     setProduct({
       ...product,
@@ -28,111 +25,130 @@ function App() {
 
   return (
     <div>
-      <form>
-        <h2>New Product</h2>
-        <section>
-          <label>
-            Product name: <br />
-            <input
-              type="text"
-              name="product_name:"
-              onChange={handleChange}
-              value={product.name}
-            />
-          </label>
-        </section>
-
-        <section>
-          <label>
-            Price:
-            <br />
-            <input
-              type="number"
-              name="price:"
-              onChange={handleChange}
-              value={product.price}
-            />
-          </label>
-        </section>
-
-        <section>
-          <label>
-            Currency: <br />
-            <input
-              type="number"
-              name="currency:"
-              onChange={handleChange}
-              value={product.currency}
-            />
-          </label>
-        </section>
-
-        <section>
-          <label>
-            Category: <br />
-            <select
-              name="category"
-              placeholder="Select a category"
-              onChange={handleChange}
-              value={product.category}
-            >
-              <option value="green">Green</option>
-              <option value="blue">Blue</option>
-              <option value="red">Red</option>
-            </select>
-          </label>
-        </section>
-
-        <section>
-          <p>package size:{product.package_size}</p>
-          <input type="radio" radio name="gender" value="male" />S
-          <input type="radio" radio name="gender" value="male" />M
-          <input type="radio" radio name="gender" value="male" />L
-        </section>
-
-        <section>
-          <label>
-            Support contact (email): <br />
-            <input
-              typ="text"
-              name="support contact:"
-              onChange={handleChange}
-              value={product.supportContact}
-            />
-          </label>
-        </section>
-
-        <section>
-          <label>
-            Product tags <br />
-            <input
-              typ="tags"
-              name="product tags"
-              onChange={handleChange}
-              value={product.product_tags}
-            />
-          </label>
-        </section>
-
-        <section>
+      <h2>New Product</h2>
+      <section>
+        <label>
+          Product name: <br />
           <input
-            type="checkbox"
-            name="on sale"
+            type="text"
+            name="name"
             onChange={handleChange}
-            checked={product.onSale}
+            value={product.name}
           />
-          On sale
-        </section>
+        </label>
+      </section>
 
-        <section>
-          <button input type="submit">
-            Add
-          </button>
-          <button input type="submit">
-            Cancel
-          </button>
-        </section>
-      </form>
+      <section>
+        <label>
+          Price:
+          <br />
+          <input
+            type="number"
+            name="price"
+            onChange={handleChange}
+            value={product.price}
+          />
+        </label>
+      </section>
+
+      <section>
+        <label>
+          Currency: <br />
+          <input
+            type="number"
+            name="currency"
+            onChange={handleChange}
+            value={product.currency}
+          />
+        </label>
+      </section>
+
+      <section>
+        <label>
+          Category: <br />
+          <select
+            name="category"
+            onChange={handleChange}
+            value={product.category}
+          >
+            <option value="green">Green</option>
+            <option value="blue">Blue</option>
+            <option value="red">Red</option>
+          </select>
+        </label>
+      </section>
+
+      <section>
+        <p>package size:{product.packageSize}</p>
+        <input
+          type="radio"
+          name="packageSize"
+          onChange={handleChange}
+          value="small"
+          checked={product.packageSize === "small"}
+        />
+        S
+        <input
+          type="radio"
+          name="packageSize"
+          onChange={handleChange}
+          value="medium"
+          checked={product.packageSize === "medium"}
+        />
+        M
+        <input
+          type="radio"
+          name="packageSize"
+          onChange={handleChange}
+          value="large"
+          checked={product.packageSize === "large"}
+        />
+        L
+      </section>
+
+      <section>
+        <label>
+          Support contact (email): <br />
+          <input
+            typ="text"
+            name="supportContact"
+            onChange={handleChange}
+            value={product.supportContact}
+          />
+        </label>
+      </section>
+
+      <section>
+        <label>
+          Product tags <br />
+          <input
+            typ="text"
+            name="productTags"
+            onChange={handleChange}
+            value={product.productTags}
+          />
+        </label>
+      </section>
+
+      <section>
+        <input
+          type="checkbox"
+          name="onSale"
+          onChange={handleChange}
+          checked={product.onSale}
+        />
+        On sale
+      </section>
+
+      <section>
+        <button input type="submit">
+          Add
+        </button>
+        <button input type="submit">
+          Cancel
+        </button>
+      </section>
+      <h3>You write this:{product.name}</h3>
     </div>
   );
 }
