@@ -34,6 +34,11 @@ export default function Form({ submitFunction }) {
     });
   };
 
+  function deleteTag(tagToDelete) {
+    const newTagList = product.tags.filter((tag) => tag !== tagToDelete);
+    setProduct({ ...product, tags: newTagList });
+  }
+
   function submitForm(event) {
     event.preventDefault();
     submitFunction(product);
@@ -137,7 +142,11 @@ export default function Form({ submitFunction }) {
       </section>
 
       <div>
-        <Tag onCreateTag={addProductTag} tags={product.tags} />
+        <Tag
+          onCreateTag={addProductTag}
+          tags={product.tags}
+          onDeleteTag={deleteTag}
+        />
       </div>
       <br />
 

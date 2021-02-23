@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-export default function Tag({ onCreateTag, tags }) {
+export default function Tag({ onCreateTag, onDeleteTag, tags }) {
   const [value, setValue] = useState("");
 
   const handleChange = (event) => setValue(event.target.value);
@@ -26,7 +26,9 @@ export default function Tag({ onCreateTag, tags }) {
       />
       <TagsList>
         {tags.map((tag, index) => (
-          <span key={index}>{tag}</span>
+          <span key={index}>
+            {tag} <i onClick={() => onDeleteTag(tag)}>&times;</i>
+          </span>
         ))}
       </TagsList>
     </>
