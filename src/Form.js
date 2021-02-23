@@ -7,7 +7,7 @@ export default function Form({ submitFunction }) {
     name: "",
     price: "",
     currency: "$",
-    category: "Green",
+    category: "Sport",
     packageSize: "",
     supportContact: "",
     tags: [],
@@ -90,9 +90,9 @@ export default function Form({ submitFunction }) {
             onChange={handleChange}
             value={product.category}
           >
-            <option value="green">Green</option>
-            <option value="blue">Blue</option>
-            <option value="red">Red</option>
+            <option value="sport">Sport</option>
+            <option value="lifestyle">Lifestyle</option>
+            <option value="living">Living</option>
           </select>
         </label>
       </section>
@@ -214,8 +214,10 @@ const Form2 = styled.form`
     margin-bottom: 16px;
   }
   input[type="radio"] {
-    margin-left: 10px;
-    margin-right: 5px;
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    width: 100%;
   }
 
   input[type="checkbox"] {
