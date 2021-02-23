@@ -17,7 +17,10 @@ export default function ProductCard({ product }) {
 
       <p>
         {product.tags.map((tag, index) => (
-          <span key={index}>{tag}</span>
+          <span key={index}>
+            <br />
+            {tag}
+          </span>
         ))}
       </p>
       <br />
