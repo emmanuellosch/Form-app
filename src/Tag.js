@@ -27,7 +27,8 @@ export default function Tag({ onCreateTag, onDeleteTag, tags }) {
       <TagsList>
         {tags.map((tag, index) => (
           <span key={index}>
-            {tag} <i onClick={() => onDeleteTag(tag)}>&times;</i>
+            {tag}{" "}
+            <DeleteIcon onClick={() => onDeleteTag(tag)}>&times;</DeleteIcon>
           </span>
         ))}
       </TagsList>
@@ -47,4 +48,10 @@ const TagsList = styled.section`
     padding: 0.3rem;
     border-radius: 5px;
   }
+`;
+
+const DeleteIcon = styled.i`
+  color: tomato;
+  margin-left: 2rem;
+  cursor: pointer;
 `;
