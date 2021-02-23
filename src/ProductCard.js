@@ -8,14 +8,19 @@ export default function ProductCard({ product }) {
       <h4>{product.name}</h4>
       <span>{product.price + ""}</span>
       <span>{product.currency}</span>
+      <br />
       <span>{product.packageSize}</span>
+      <br />
       <span>{product.supportContact}</span>
+      <br />
 
       <p>
         {product.tags.map((tag, index) => (
           <span key={index}>{tag}</span>
         ))}
       </p>
+      <br />
+      <span>{product.onSale ? "yes" : "no"} </span>
     </Card>
   );
 }
