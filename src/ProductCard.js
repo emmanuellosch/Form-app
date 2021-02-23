@@ -21,7 +21,8 @@ export default function ProductCard({ product }) {
 }
 
 const Card = styled.div`
-  background-color: #6171ad;
+  background-color: #14b2cf;
+  color: white;
   padding: 0.5rem 0.5rem 2rem 1.5rem;
   border-radius: 10px;
   max-width: 500px;

@@ -37,9 +37,11 @@ const TagsList = styled.section`
   display: flex;
   flex-wrap: wrap;
   margin-top: 0.5rem;
+  justify-content: space-around;
 
   span {
-    background: deeppink;
+    background-color: #14b2cf;
+    color: white;
     padding: 0.3rem;
     border-radius: 5px;
   }

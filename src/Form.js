@@ -139,6 +139,7 @@ export default function Form({ submitFunction }) {
       <div>
         <Tag onCreateTag={addProductTag} tags={product.tags} />
       </div>
+      <br />
 
       <section>
         <input
