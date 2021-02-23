@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { Component, useState } from "react";
+import styled from "styled-components";
 
 export default function Form() {
   const [product, setProduct] = useState({
@@ -52,13 +53,16 @@ export default function Form() {
 
       <section>
         <label>
-          Currency: <br />
-          <input
+          Currency: {product.currency} <br />
+          <select
             type="number"
             name="currency"
             onChange={handleChange}
             value={product.currency}
-          />
+          >
+            <option value="$">Dollar</option>
+            <option value="€">Euro</option>
+          </select>
         </label>
       </section>
 
@@ -147,7 +151,17 @@ export default function Form() {
           Cancel
         </button>
       </section>
-      <h3>You write this:{product.name}</h3>
+      <br />
+
+      <h2>Ausgabe:</h2>
+
+      <p>You write this:{product.name}</p>
+      <p>You write this:{product.price}</p>
+      <p>You write this:{product.currency}</p>
+      <p>You write this:{product.category}</p>
+      <p>You write this:{product.packageSize}</p>
+      <p>You write this:{product.supportContact}</p>
+      <p>You write this:{product.onSale ? "yes" : "no"}</p>
     </form>
   );
 }
