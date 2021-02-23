@@ -1,6 +1,8 @@
 import "./App.css";
 import { useState } from "react";
 
+// import Form from "./Form";
+
 function App() {
   const [product, setProduct] = useState({
     name: "",
@@ -25,130 +27,132 @@ function App() {
 
   return (
     <div>
-      <h2>New Product</h2>
-      <section>
-        <label>
-          Product name: <br />
+      <form>
+        <h2>New Product</h2>
+        <section>
+          <label>
+            Product name: <br />
+            <input
+              type="text"
+              name="name"
+              onChange={handleChange}
+              value={product.name}
+            />
+          </label>
+        </section>
+
+        <section>
+          <label>
+            Price:
+            <br />
+            <input
+              type="number"
+              name="price"
+              onChange={handleChange}
+              value={product.price}
+            />
+          </label>
+        </section>
+
+        <section>
+          <label>
+            Currency: <br />
+            <input
+              type="number"
+              name="currency"
+              onChange={handleChange}
+              value={product.currency}
+            />
+          </label>
+        </section>
+
+        <section>
+          <label>
+            Category:{product.category} <br />
+            <select
+              name="category"
+              onChange={handleChange}
+              value={product.category}
+            >
+              <option value="green">Green</option>
+              <option value="blue">Blue</option>
+              <option value="red">Red</option>
+            </select>
+          </label>
+        </section>
+
+        <section>
+          <p>package size:{product.packageSize}</p>
           <input
-            type="text"
-            name="name"
+            type="radio"
+            name="packageSize"
             onChange={handleChange}
-            value={product.name}
+            value="small"
+            checked={product.packageSize === "small"}
           />
-        </label>
-      </section>
-
-      <section>
-        <label>
-          Price:
-          <br />
+          S
           <input
-            type="number"
-            name="price"
+            type="radio"
+            name="packageSize"
             onChange={handleChange}
-            value={product.price}
+            value="medium"
+            checked={product.packageSize === "medium"}
           />
-        </label>
-      </section>
-
-      <section>
-        <label>
-          Currency: <br />
+          M
           <input
-            type="number"
-            name="currency"
+            type="radio"
+            name="packageSize"
             onChange={handleChange}
-            value={product.currency}
+            value="large"
+            checked={product.packageSize === "large"}
           />
-        </label>
-      </section>
+          L
+        </section>
 
-      <section>
-        <label>
-          Category: <br />
-          <select
-            name="category"
-            onChange={handleChange}
-            value={product.category}
-          >
-            <option value="green">Green</option>
-            <option value="blue">Blue</option>
-            <option value="red">Red</option>
-          </select>
-        </label>
-      </section>
+        <section>
+          <label>
+            Support contact (email): <br />
+            <input
+              typ="text"
+              name="supportContact"
+              onChange={handleChange}
+              value={product.supportContact}
+            />
+          </label>
+        </section>
 
-      <section>
-        <p>package size:{product.packageSize}</p>
-        <input
-          type="radio"
-          name="packageSize"
-          onChange={handleChange}
-          value="small"
-          checked={product.packageSize === "small"}
-        />
-        S
-        <input
-          type="radio"
-          name="packageSize"
-          onChange={handleChange}
-          value="medium"
-          checked={product.packageSize === "medium"}
-        />
-        M
-        <input
-          type="radio"
-          name="packageSize"
-          onChange={handleChange}
-          value="large"
-          checked={product.packageSize === "large"}
-        />
-        L
-      </section>
+        <section>
+          <label>
+            Product tags <br />
+            <input
+              typ="text"
+              name="productTags"
+              onChange={handleChange}
+              value={product.productTags}
+            />
+          </label>
+        </section>
 
-      <section>
-        <label>
-          Support contact (email): <br />
+        <section>
           <input
-            typ="text"
-            name="supportContact"
+            type="checkbox"
+            name="onSale"
             onChange={handleChange}
-            value={product.supportContact}
+            checked={product.onSale}
           />
-        </label>
-      </section>
+          On sale
+        </section>
 
-      <section>
-        <label>
-          Product tags <br />
-          <input
-            typ="text"
-            name="productTags"
-            onChange={handleChange}
-            value={product.productTags}
-          />
-        </label>
-      </section>
-
-      <section>
-        <input
-          type="checkbox"
-          name="onSale"
-          onChange={handleChange}
-          checked={product.onSale}
-        />
-        On sale
-      </section>
-
-      <section>
-        <button input type="submit">
-          Add
-        </button>
-        <button input type="submit">
-          Cancel
-        </button>
-      </section>
-      <h3>You write this:{product.name}</h3>
+        <section>
+          <button input type="submit">
+            Add
+          </button>
+          <button input type="submit">
+            Cancel
+          </button>
+        </section>
+        <h3>You write this:{product.name}</h3>
+      </form>
     </div>
   );
 }
