@@ -1,33 +1,22 @@
 import "./App.css";
 import { useState } from "react";
-
+import { v4 as uuidv4 } from "uuid";
+import ProductCard from "./ProductCard";
 import Form from "./Form";
 
 function App() {
-  const [product, setProduct] = useState({
-    name: "",
-    price: "",
-    currency: "",
-    category: "Green",
-    product_packageSize: "",
-    product_supportContact: "",
-    product_productTags: [],
-    onSale: false,
-  });
+  const [products, setProducts] = useState([]);
 
-  const handleChange = (event) => {
-    const field = event.target;
-    const value = field.type === "checkbox" ? field.checked : field.value;
-
-    setProduct({
-      ...product,
-      [field.name]: value,
-    });
+  const addProduct = (product) => {
+    setProducts([...products, { ...product, id: uuidv4() }]);
   };
 
   return (
     <div>
-      <Form />
+      <Form submitFunction={addProduct} />
+      {products.map((product) => (
+        <ProductCard product={product} />
+      ))}
     </div>
   );
 }

@@ -1,34 +1,52 @@
 import { Component, useState } from "react";
 import styled from "styled-components";
+import Tag from "./Tag";
 
-export default function Form() {
-  const [product, setProduct] = useState({
+export default function Form({ submitFunction }) {
+  const initialProduct = {
     name: "",
     price: "",
-    currency: "",
+    currency: "$",
     category: "Green",
-    product_packageSize: "",
-    product_supportContact: "",
-    product_productTags: [],
+    packageSize: "",
+    supportContact: "",
+    tags: [],
     onSale: false,
-  });
+  };
+
+  const [product, setProduct] = useState(initialProduct);
 
   const handleChange = (event) => {
     const field = event.target;
-    const value = field.type === "checkbox" ? field.checked : field.value;
+    let value = event.target.value;
 
+    if (event.target.type === "checkbox") {
+      value = event.target.checked;
+    }
+
+    setProduct({ ...product, [field.name]: value });
+  };
+
+  const addProductTag = (tag) => {
     setProduct({
       ...product,
-      [field.name]: value,
+      tags: [...product.tags, tag],
     });
   };
 
+  function submitForm(event) {
+    event.preventDefault();
+    submitFunction(product);
+    setProduct(initialProduct);
+  }
+
   return (
-    <form>
+    <Form2 onSubmit={submitForm}>
       <h2>New Product</h2>
       <section>
         <label>
-          Product name: <br />
+          Product name: {product.name}
+          <br />
           <input
             type="text"
             name="name"
@@ -40,7 +58,7 @@ export default function Form() {
 
       <section>
         <label>
-          Price:
+          Price:{product.price}
           <br />
           <input
             type="number"
@@ -50,7 +68,6 @@ export default function Form() {
           />
         </label>
       </section>
-
       <section>
         <label>
           Currency: {product.currency} <br />
@@ -65,7 +82,6 @@ export default function Form() {
           </select>
         </label>
       </section>
-
       <section>
         <label>
           Category:{product.category} <br />
@@ -80,7 +96,6 @@ export default function Form() {
           </select>
         </label>
       </section>
-
       <section>
         <p>package size:{product.packageSize}</p>
         <input
@@ -108,7 +123,7 @@ export default function Form() {
         />
         L
       </section>
-
+      <br />
       <section>
         <label>
           Support contact (email): <br />
@@ -121,17 +136,9 @@ export default function Form() {
         </label>
       </section>
 
-      <section>
-        <label>
-          Product tags <br />
-          <input
-            typ="text"
-            name="productTags"
-            onChange={handleChange}
-            value={product.productTags}
-          />
-        </label>
-      </section>
+      <div>
+        <Tag onCreateTag={addProductTag} tags={product.tags} />
+      </div>
 
       <section>
         <input
@@ -142,26 +149,75 @@ export default function Form() {
         />
         On sale
       </section>
-
-      <section>
-        <button input type="submit">
-          Add
-        </button>
-        <button input type="submit">
-          Cancel
-        </button>
-      </section>
       <br />
-
-      <h2>Ausgabe:</h2>
-
-      <p>You write this:{product.name}</p>
-      <p>You write this:{product.price}</p>
-      <p>You write this:{product.currency}</p>
-      <p>You write this:{product.category}</p>
-      <p>You write this:{product.packageSize}</p>
-      <p>You write this:{product.supportContact}</p>
-      <p>You write this:{product.onSale ? "yes" : "no"}</p>
-    </form>
+      <ButtonBar>
+        <button type="submit">Add</button>
+        <button type="reset">Cancel</button>
+      </ButtonBar>
+    </Form2>
   );
 }
+
+const ButtonBar = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  button {
+    border: none;
+    padding: 0.3rem 2rem;
+    width: 48%;
+  }
+  button[type="submit"] {
+    background-color: #14b2cf;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #1091a9;
+  }
+
+  button [typ="reset"] {
+    background-color: #ddd;
+    color: #cd4747;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  button[type="reset"]:hover {
+    background-color: #a72600;
+    color: white;
+  }
+`;
+
+const Form2 = styled.form`
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+
+  input:not([type="color"]):not([type="radio"]):not([type="checkbox"]),
+  select,
+  textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+  }
+  input[type="radio"] {
+    margin-left: 10px;
+    margin-right: 5px;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 10px;
+  }
+`;
