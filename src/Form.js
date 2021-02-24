@@ -1,6 +1,7 @@
 import { Component, useState } from "react";
 import styled from "styled-components";
 import Tag from "./Tag";
+import isValidProduct from "./lib/ValidateFunctions";
 
 export default function Form({ submitFunction }) {
   const initialProduct = {
@@ -15,6 +16,7 @@ export default function Form({ submitFunction }) {
   };
 
   const [product, setProduct] = useState(initialProduct);
+  const [isError, setIsError] = useState(false);
 
   const handleChange = (event) => {
     const field = event.target;
@@ -39,27 +41,20 @@ export default function Form({ submitFunction }) {
     setProduct({ ...product, tags: newTagList });
   }
 
-  const isValidProduct = (product) =>
-    isValidProductName(product.name) &&
-    isValidEmailAdress(product.supportContact) &&
-    isValidPrice(product.price);
-
-  const isValidProductName = (name) => name.length >= 2;
-  const isValidEmailAdress = (email) => email.includes("@");
-  const isValidPrice = (price) => !price.includes(".");
-
   function submitForm(event) {
     event.preventDefault();
     if (isValidProduct(product)) {
       submitFunction(product);
       setProduct(initialProduct);
+      setIsError(false);
     } else {
-      alert("Error in Form");
+      setIsError(true);
     }
   }
 
   return (
     <Form2 onSubmit={submitForm}>
+      {isError && <Div>You have an Error in your Form!</Div>}
       <h2>New Product</h2>
       <section>
         <label>
@@ -248,4 +243,9 @@ const Form2 = styled.form`
   input[type="checkbox"] {
     margin-right: 10px;
   }
+`;
+
+const Div = styled.div`
+  color: red;
+  border: 1.5rem;
 `;

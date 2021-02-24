@@ -13,6 +13,7 @@ function App() {
 
   return (
     <div>
+      <h1>Add a Product</h1>
       <Form submitFunction={addProduct} />
       {products.map((product) => (
         <ProductCard product={product} />
