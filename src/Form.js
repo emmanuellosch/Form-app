@@ -190,7 +190,7 @@ const ButtonBar = styled.div`
     background-color: #1091a9;
   }
 
-  button [typ="reset"] {
+  button [type="reset"] {
     background-color: #ddd;
     color: #cd4747;
     padding: 12px 20px;
@@ -211,7 +211,7 @@ const Form2 = styled.form`
   background-color: #f2f2f2;
   padding: 20px;
 
-  input:not([type="color"]):not([type="radio"]):not([type="checkbox"]),
+  input:not([type="radio"]):not([type="checkbox"]):not([name="tags"]),
   select,
   textarea {
     width: 100%;
