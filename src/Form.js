@@ -5,7 +5,7 @@ import Tag from "./Tag";
 export default function Form({ submitFunction }) {
   const initialProduct = {
     name: "",
-    price: "",
+    price: "0",
     currency: "$",
     category: "Sport",
     packageSize: "",
@@ -39,10 +39,23 @@ export default function Form({ submitFunction }) {
     setProduct({ ...product, tags: newTagList });
   }
 
+  const isValidProduct = (product) =>
+    isValidProductName(product.name) &&
+    isValidEmailAdress(product.supportContact) &&
+    isValidPrice(product.price);
+
+  const isValidProductName = (name) => name.length >= 2;
+  const isValidEmailAdress = (email) => email.includes("@");
+  const isValidPrice = (price) => !price.includes(".");
+
   function submitForm(event) {
     event.preventDefault();
-    submitFunction(product);
-    setProduct(initialProduct);
+    if (isValidProduct(product)) {
+      submitFunction(product);
+      setProduct(initialProduct);
+    } else {
+      alert("Error in Form");
+    }
   }
 
   return (
@@ -66,7 +79,7 @@ export default function Form({ submitFunction }) {
           Price:{product.price}
           <br />
           <input
-            type="number"
+            type="text"
             name="price"
             onChange={handleChange}
             value={product.price}
@@ -95,6 +108,9 @@ export default function Form({ submitFunction }) {
             onChange={handleChange}
             value={product.category}
           >
+            <option value="---Please select a Category">
+              ---Please select a Category---
+            </option>
             <option value="sport">Sport</option>
             <option value="lifestyle">Lifestyle</option>
             <option value="living">Living</option>
