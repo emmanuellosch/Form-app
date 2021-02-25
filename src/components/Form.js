@@ -1,7 +1,7 @@
-import { Component, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import Tag from "./Tag";
-import isValidProduct from "./lib/ValidateFunctions";
+import isValidProduct from "../lib/ValidateFunctions";
 
 export default function Form({ submitFunction }) {
   const initialProduct = {

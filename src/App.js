@@ -1,8 +1,8 @@
 import "./App.css";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import ProductCard from "./ProductCard";
-import Form from "./Form";
+import ProductCard from "./components/ProductCard";
+import Form from "./components/Form";
 
 function App() {
   const [products, setProducts] = useState([]);
